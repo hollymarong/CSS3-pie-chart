@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>CSS3 pie</title>
+	<style>
+		*{
+			margin:0;
+			padding:0;
+			list-style-type:0;
+		}
+	.pie {
+		position:absolute;
+		width:200px;
+		height:200px;
+		clip:rect(0px,100px,200px,0px);
+		-moz-border-radius:100px;
+		-webkit-border-radius:100px;
+		border-radius:100px;
+	}
+	.hold {
+		position:absolute;
+		width:200px;
+		height:200px;
+		clip:rect(0px,200px,200px,100px);
+	}
+	.chart1{
+
+	}
+	#piece1 {
+	}
+	#piece1 .pie {
+	   background-color:rgb(161,23,21);
+	   -moz-transform:rotate(120deg);
+	   -webkit-transform:rotate(120deg);
+	   -o-transform:rotate(120deg);
+	   transform:rotate(120deg);
+	}
+	#piece2 {
+	  -moz-transform:rotate(120deg);
+	   -webkit-transform:rotate(120deg);
+	   -o-transform:rotate(120deg);
+	   transform:rotate(120deg);
+	}
+	#piece2 .pie {
+	   background-color:rgb(107,194,53);
+	   -moz-transform:rotate(120deg);
+	   -webkit-transform:rotate(120deg);
+	   -o-transform:rotate(120deg);
+	   transform:rotate(120deg);
+	}
+	#piece3 {
+	  -moz-transform:rotate(240deg);
+	   -webkit-transform:rotate(240deg);
+	   -o-transform:rotate(240deg);
+	   transform:rotate(240deg);
+	}
+	#piece3 .pie {
+	   background-color:rgb(230,179,61);
+	   -moz-transform:rotate(120deg);
+	   -webkit-transform:rotate(120deg);
+	   -o-transform:rotate(120deg);
+	   transform:rotate(120deg);
+	}
+	.chart2{
+		margin-left:400px;
+	}
+	#piece11 {
+		clip:rect(auto,auto,auto,auto);
+		margin-top:10px;
+		margin-left:10px;
+	}
+	#piece11 .pie {
+	   background-color:rgb(161,23,21);
+	   transform:rotate(180deg);
+	}
+	#piece11 .pie.full {
+	   background-color:rgb(161,23,21);
+	   transform:rotate(240deg);
+	}
+	#piece22 {
+	   transform:rotate(240deg);
+	}
+	#piece22 .pie {
+	   background-color:rgb(107,194,53);
+	   transform:rotate(60deg);
+	}
+	#piece33 {
+	   transform:rotate(300deg);
+	}
+	#piece33 .pie {
+	   background-color:rgb(230,179,61);
+	   transform:rotate(60deg);
+	}
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<div class="chart1">
+			<div id="piece1" class="hold">
+			    <div class="pie"></div>
+			</div>
+			<div id="piece2" class="hold">
+			    <div class="pie"></div>
+			</div>
+			<div id="piece3" class="hold">
+			    <div class="pie"></div>
+			</div>
+		</div>
+		<div class="chart2">
+			<div id="piece11" class="hold">
+			    <div class="pie full"></div>
+			    <div class="pie"></div>
+			</div>
+			<div id="piece22" class="hold">
+			    <div class="pie"></div>
+			</div>
+			<div id="piece33" class="hold">
+			    <div class="pie"></div>
+			</div>
+		</div>
+
+	</div>
+</body>
+</html>

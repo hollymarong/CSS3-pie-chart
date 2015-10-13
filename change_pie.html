@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>change_pie</title>
+	<style>
+		*{
+			margin:0;
+			padding:0;
+			list-style-type:none;
+		}
+		body{
+			background:#d8d6cb;
+		}
+		.wrap{
+			padding-top:60px;
+		}
+		.piechart{
+			position:relative;
+			width:800px;
+			height:300px;
+			margin:0 auto;
+		}
+		.hold{
+			position:absolute;
+			top:0;
+			left:0;
+			width:200px;
+			height:200px;
+			clip:rect(0,200px,200px,100px);
+			transition:all 0.3s cubic-bezier(0.45, 0.05, 0.55, 0.95) ;
+		}
+		.pie{
+			position:absolute;
+			width:200px;
+			height:200px;
+			clip:rect(0, 100px, 200px, 0);
+			transition:all 0.3s cubic-bezier(0.45, 0.05, 0.55, 0.95) ;
+		}
+		/*初始化第一个饼图的状态 START*/
+		.one .hold{
+			clip:rect(auto, auto, auto,auto);
+		}
+		.one .pie{
+			background-color:#0092B9;
+			transform:rotate(180deg);
+			border-radius:200px;
+
+		}
+		.one .pie.full{
+			background-color:#0092B9;
+			transform:rotate(240deg);
+			border-radius:200px;
+		}
+		.two .hold{
+			transform:rotate(240deg);
+		}
+		.two .pie{
+			background-color:rgb(107,194,53);
+			transform:rotate(30deg);
+			border-radius:200px;
+		}
+		.three .hold{
+			transform:rotate(270deg);
+		}
+		.three .pie{
+			background-color:rgb(161,23,21);
+			transform:rotate(30deg);
+			border-radius:200px;
+		}
+		.four .hold{
+			transform:rotate(300deg);
+		}
+		.four .pie{
+			background-color:rgb(217,104,49);
+			transform:rotate(30deg);
+			border-radius:200px;
+		}
+		.five .hold{
+			transform:rotate(330deg);
+		}
+		.five .pie{
+			background-color:rgb(178,200,187);
+			transform:rotate(30deg);
+			border-radius:200px;
+		}
+		/*初始化第一个饼图的状态 END*/
+		.menus{
+			position:absolute;
+			bottom:0;
+			right:0;
+			width:100%;
+		}
+		.menus li{
+			float:left;
+			width:60px;
+			height:40px;
+			margin-right:10px;
+			text-align:center;
+		}
+		.menus li a{
+			display:block;
+			width:100%;
+			height:100%;
+			line-height:40px;
+			color:#666;
+			background:#ededed;
+			text-decoration: none;
+			border-radius:8px;
+
+		}
+		.menus li:nth-child(1) a{
+			transform:scale(1.1);
+			background-color:#fff;
+		}
+		/*点击menu时，menu状态的变化 START*/
+		#chart1:target .menus li:nth-child(1) a{
+			transform:scale(1.1);
+			background-color:#fff;
+		}
+		#chart2:target .menus li:nth-child(2) a{
+			transform:scale(1.1);
+			background-color:#fff;
+		}
+		#chart3:target .menus li:nth-child(3) a{
+			transform:scale(1.1);
+			background-color:#fff;
+		}
+		#chart4:target .menus li:nth-child(4) a{
+			transform:scale(1.1);
+			background-color:#fff;
+		}
+		#chart2:target .menus li:first-child a,
+		#chart3:target .menus li:first-child a,
+		#chart4:target .menus li:first-child a{
+			color:#666;
+			background:#ededed;
+			transform:scale(1);
+		}
+		/*点击menu时，menu状态的变化 START*/
+
+		/*点击第二个图标的时候图表的变化 START*/
+		#chart2:target .one .hold{
+			clip:rect(auto, auto, auto,auto);
+		}
+		#chart2:target .one .pie{
+			background-color:#0092B9;
+			transform:rotate(180deg);
+			border-radius:200px;
+		}
+		#chart2:target .one .pie.full{
+			display:none;
+			background-color:#0092B9;
+			transform:rotate(240deg);
+			border-radius:200px;
+		}
+		#chart2:target .two .hold{
+			transform:rotate(180deg);
+		}
+		#chart2:target .two .pie{
+			background-color:rgb(107,194,53);
+			transform:rotate(80deg);
+			border-radius:200px;
+		}
+		#chart2:target .three .hold{
+			transform:rotate(260deg);
+		}
+		#chart2:target .three .pie{
+			background-color:rgb(161,23,21);
+			transform:rotate(60deg);
+			border-radius:200px;
+		}
+		#chart2:target .four .hold{
+			transform:rotate(320deg);
+		}
+		#chart2:target .four .pie{
+			background-color:rgb(217,104,49);
+			transform:rotate(30deg);
+			border-radius:200px;
+		}
+		#chart2:target .five .hold{
+			transform:rotate(350deg);
+		}
+		#chart2:target .five .pie{
+			background-color:rgb(178,200,187);
+			transform:rotate(10deg);
+			border-radius:200px;
+		}
+		/*点击第二个图标的时候图表的变化 END*/
+
+		/*点击第三个图标的时候图表的变化 START*/
+		#chart3:target .one .hold{
+			clip:rect(0, 200px, 200px,100px);
+		}
+		#chart3:target .one .pie{
+			background-color:#0092B9;
+			transform:rotate(80deg);
+			border-radius:200px;
+		}
+		#chart3:target .one .pie.full{
+			display:none;
+			background-color:#0092B9;
+			transform:rotate(0deg);
+			border-radius:200px;
+		}
+		#chart3:target .two .hold{
+			transform:rotate(80deg);
+		}
+		#chart3:target .two .pie{
+			background-color:rgb(107,194,53);
+			transform:rotate(120deg);
+			border-radius:200px;
+		}
+		#chart3:target .three .hold{
+			transform:rotate(200deg);
+		}
+		#chart3:target .three .pie{
+			background-color:rgb(161,23,21);
+			transform:rotate(80deg);
+			border-radius:200px;
+		}
+		#chart3:target .four .hold{
+			transform:rotate(280deg);
+		}
+		#chart3:target .four .pie{
+			background-color:rgb(217,104,49);
+			transform:rotate(75deg);
+			border-radius:200px;
+		}
+		#chart3:target .five .hold{
+			transform:rotate(359deg);
+		}
+		#chart3:target .five .pie{
+			background-color:rgb(178,200,187);
+			transform:rotate(1deg);
+			border-radius:200px;
+		}
+		/*点击第三个图标的时候图表的变化 END*/
+
+		/*点击第四个图标的时候图表的变化 START*/
+		#chart4:target .one .hold{
+			clip:rect(0, 200px, 200px,100px);
+		}
+		#chart4:target .one .pie{
+			background-color:#0092B9;
+			transform:rotate(10deg);
+			border-radius:200px;
+		}
+		#chart4:target .one .pie.full{
+			display:none;
+			background-color:#0092B9;
+			transform:rotate(240deg);
+			border-radius:200px;
+		}
+		#chart4:target .two .hold{
+			transform:rotate(10deg);
+		}
+		#chart4:target .two .pie{
+			background-color:rgb(107,194,53);
+			transform:rotate(10deg);
+			border-radius:200px;
+		}
+		#chart4:target .three .hold{
+			transform:rotate(20deg);
+		}
+		#chart4:target .three .pie{
+			background-color:rgb(161,23,21);
+			transform:rotate(50deg);
+			border-radius:200px;
+		}
+		#chart4:target .four .hold{
+			transform:rotate(70deg);
+		}
+		#chart4:target .four .pie{
+			background-color:rgb(217,104,49);
+			transform:rotate(130deg);
+			border-radius:200px;
+		}
+		#chart4:target .five .hold{
+			transform:rotate(200deg);
+		}
+		#chart4:target .five .pie{
+			background-color:rgb(178,200,187);
+			transform:rotate(160deg);
+			border-radius:200px;
+		}
+		/*点击第四个图标的时候图表的变化 END*/
+		#chart1:target .piedata{
+			left:0;
+		}
+		#chart2:target .piedata{
+			left:-40px;
+		}
+		#chart3:target .piedata{
+			left:-80px;
+		}
+		#chart4:target .piedata{
+			left:-120px;
+		}
+		/*图表描述 START*/
+		.piedescribe{
+			position:absolute;
+			top:0;
+			right:0;
+		}
+		.pietitle{
+			position:absolute;
+			top:0;
+			left:0;
+			width:60px;
+			text-align:left;
+		}
+		.pietitle li{
+			height:20px;
+			line-height:20px;
+		}
+		.piedatawarp{
+			position:absolute;
+			top:0;
+			left:70px;
+			width:40px;
+			height:100px;
+			overflow:hidden;
+		}
+		.piedata{
+			position:absolute;
+			top:0;
+			left:0px;
+			width:200px;
+		}
+		.piedata ul{
+			width:200px;
+			height:20px;
+		}
+		.piedata ul li{
+			float:left;
+			width:40px;
+			height:20px;
+			line-height:20px;
+			text-align:left;
+		}
+		/*图表描述 END*/
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<div class="piechart">
+			<div id="chart1">
+			<div id="chart2">
+			<div id="chart3">
+			<div id="chart4">
+				<div class="piedescribe">
+					<div class="pietitle">
+						<ul>
+							<li><span></span>内容1</li>
+							<li><span></span>内容2</li>
+							<li><span></span>内容3</li>
+							<li><span></span>内容4</li>
+							<li><span></span>内容5</li>
+						</ul>
+					</div>
+					<div class="piedatawarp">
+						<div class="piedata">
+							<ul>
+								<li>240</li>
+								<li>180</li>
+								<li>80</li>
+								<li>10</li>
+							</ul>
+							<ul>
+								<li>30</li>
+								<li>80</li>
+								<li>120</li>
+								<li>10</li>
+							</ul>
+							<ul>
+								<li>30</li>
+								<li>60</li>
+								<li>80</li>
+								<li>50</li>
+							</ul>
+							<ul>
+								<li>30</li>
+								<li>30</li>
+								<li>79</li>
+								<li>130</li>
+							</ul>
+							<ul>
+								<li>30</li>
+								<li>10</li>
+								<li>1</li>
+								<li>160</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="piecontent">
+					<ul>
+						<li class="one">
+							<p class="hold">
+								<span class="pie"></span>
+								<span class="pie full"></span>
+							</p>
+						</li>
+						<li class="two">
+							<p class="hold">
+								<span class="pie"></span>
+							</p>
+						</li>
+						<li class="three">
+							<p class="hold">
+								<span class="pie"></span>
+							</p>
+						</li>
+						<li class="four">
+							<p class="hold">
+								<span class="pie"></span>
+							</p>
+						</li>
+						<li class="five">
+							<p class="hold">
+								<span class="pie"></span>
+							</p>
+						</li>
+					</ul>
+				</div><!-- piecontent -->
+				<ul class="menus">
+					<li><a href="#chart1">chart1</a></li>
+					<li><a href="#chart2">chart2</a></li>
+					<li><a href="#chart3">chart3</a></li>
+					<li><a href="#chart4">chart4</a></li>
+				</ul>
+			</div><!-- chart1 -->
+			</div><!-- chart2 -->
+			</div><!-- chart3 -->
+			</div><!-- chart4 -->
+
+		</div>
+	</div>
+</body>
+</html>
